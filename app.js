@@ -1,33 +1,57 @@
-let texts = ['text1', 'text2', 'text3'];
 
 let parent = document.querySelector("#slider")
-let child = document.createElement("p");
+let childs = parent.querySelectorAll("img");
 let left = document.querySelector("#left")
 let right = document.querySelector("#right")
-parent.appendChild(child);
 
-let i = 0 
+let i = 0
 
-child.textContent = texts[i]
+setInterval(function () {
+  for (let child of childs) {
+  if (child.classList.contains("active")) {
+    child.classList.remove("active");
+  }
+}
+  if (i < childs.length-1) {    
+    i++;
+  } else {
+    i = 0    
+  }
+  childs[i].classList.add("active")
+}  , 1000)
 
 left.addEventListener('click', function () {
-  if (i > 0) {
-     i--;	
+  for (let child of childs) {
+  if (child.classList.contains("active")) {
+    child.classList.remove("active");
   }
-  else{
-    i = texts.length-1;      
   }
   
-  child.textContent = texts[i]
- 
-});
-right.addEventListener('click', function() {
-	if (i < texts.length-1) {
-     i++;	
+  if (i > 0) {
+    i--;    
+    
+  } else {
+      i = childs.length-1;    
+    }
+    childs[i].classList.add("active") 
+  }
+);
+
+right.addEventListener('click', function () {
+  for (let child of childs) {
+    if (child.classList.contains("active")) {
+      child.classList.remove("active");
+    }
+  }
+  if (i < childs.length - 1) {
+    i++;
   }
   
   else {
     i = 0;
+   
   }
-  child.textContent = texts[i]
-});
+  childs[i].classList.add("active")
+}
+  
+);
